@@ -1,9 +1,4 @@
 ﻿using Bajtpik.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bajtpik.Data.Interfaces;
 
 namespace ConsoleApp
@@ -14,7 +9,7 @@ namespace ConsoleApp
         {
             List<IEntity> authors = new List<IEntity>();
 
-            authors.Add(new Author("Douglas", "Adams", 1952,""));
+            authors.Add(new Author("Douglas", "Adams", 1952, ""));
             authors.Add(new Author("Tom", "Wolfe", 1930));
             authors.Add(new Author("Elmar", "Eisemann", 1978));
             authors.Add(new Author("Michael", "Schwarz", 1970));
@@ -46,7 +41,7 @@ namespace ConsoleApp
             books.Add(new Book("The Right Stuff", 1993, 512, new List<IAuthor> { authors[1] }));
             books.Add(new Book("Real-Time Shadows", 2011, 383, new List<IAuthor> { authors[2], authors[3], authors[4], authors[5] }));
             books.Add(new Book("Mesjasz Diuny", 1972, 272, new List<IAuthor> { authors[6] }));
-            books.Add(new Book("Dobry Omen", 1990, 416,new List<IAuthor>()));
+            books.Add(new Book("Dobry Omen", 1990, 416, new List<IAuthor>()));
 
             return books;
         }
@@ -67,7 +62,7 @@ namespace ConsoleApp
         {
             List<IEntity> boardGames = new List<IEntity>();
             List<IAuthor> authors = new List<IAuthor>();
-            foreach(var author in authors_list)
+            foreach (var author in authors_list)
             {
                 authors.Add((IAuthor)author);
             }

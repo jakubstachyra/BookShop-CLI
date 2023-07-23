@@ -1,9 +1,4 @@
 ﻿using Bajtpik.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bajtpik.Data.Builders
 {
@@ -15,7 +10,7 @@ namespace Bajtpik.Data.Builders
         protected int difficulty;
         protected List<IAuthor> authors;
 
-        public  IEntity Build()
+        public IEntity Build()
         {
             return new BoardGame(title, minPlayers, maxPlayers, difficulty, authors);
         }
@@ -45,7 +40,7 @@ namespace Bajtpik.Data.Builders
                     break;
 
                 case "difficulty":
-                    if(int.TryParse(value, out int difficultyValue))
+                    if (int.TryParse(value, out int difficultyValue))
                     {
                         difficulty = difficultyValue;
                     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp.Command
+﻿namespace ConsoleApp.Command
 {
     public class LoadCommand : ICommand
     {
@@ -22,9 +16,9 @@ namespace ConsoleApp.Command
 
             foreach (var line in loadedCommands)
             {
-                CommandProcessor.ProcessCommand(line,1);
+                CommandProcessor.ProcessCommand(line, 1);
             }
-             Console.WriteLine($"Commands loaded from '{filename}' and added to the history.");
+            Console.WriteLine($"Commands loaded from '{filename}' and added to the history.");
         }
 
         public override string ToString()

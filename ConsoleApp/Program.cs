@@ -1,9 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Bajtpik.Data;
+using Bajtpik.Data.Interfaces;
 using ConsoleApp;
 using ConsoleApp.Command;
-using System.Collections.Generic;
-using Bajtpik.Data.Interfaces;
 
 Console.Write("Bajtpik, buy a book! - for help type:");
 Console.ForegroundColor = ConsoleColor.DarkCyan;

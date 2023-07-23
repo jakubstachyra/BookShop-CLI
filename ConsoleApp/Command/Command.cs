@@ -1,11 +1,4 @@
-﻿using Bajtpik.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bajtpik.Data.Interfaces;
-using System.Collections;
+﻿using Bajtpik.Data.Interfaces;
 
 namespace ConsoleApp.Command
 {
@@ -15,66 +8,6 @@ namespace ConsoleApp.Command
         void Undo();
         void Redo();
 
-    }
-
-    public class ListCommand : ICommand
-    {
-        private readonly ICollection<IEntity> collection;
-        private string classname;
-        public ListCommand(ICollection<IEntity> collection, string classname)
-        {
-            this.collection = collection;
-            this.classname = classname;
-        }
-        public ListCommand()
-        {
-
-        }
-        public void Execute()
-        {
-            Console.WriteLine("Listing objects:");
-            foreach (var obj in collection)
-            {
-                Console.WriteLine(obj.ToString());
-            }
-            Console.WriteLine();
-        }
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("list").Append(" ").Append(classname);
-            return sb.ToString();
-        }
-        public void Undo()
-        {
-            return;
-        }
-        public void Redo()
-        {
-            this.Execute();
-        }
-    }
-
-
-    public class ExitCommand : ICommand
-    {
-        public void Execute()
-        {
-            Console.WriteLine("Exiting the application...");
-            Environment.Exit(0);
-        }
-        public override string ToString()
-        {
-            return "exit";
-        }
-        public void Undo()
-        {
-            return;
-        }
-        public void Redo()
-        {
-            return;
-        }
     }
 
     public class CommandFactory
@@ -118,7 +51,8 @@ namespace ConsoleApp.Command
                         createdCommand = new AddCommand(collection, arguments[0], arguments[1]);
                     }
                     else
-                    {   if(arguments == null)
+                    {
+                        if (arguments == null)
                         {
                             arguments = new string[2];
                         }
@@ -171,7 +105,7 @@ namespace ConsoleApp.Command
 
     public class CommandProcessor
     {
-        private static  IDictionary<string, ICollection<IEntity>> collections;
+        private static IDictionary<string, ICollection<IEntity>> collections;
 
         public CommandProcessor()
         {
@@ -183,35 +117,36 @@ namespace ConsoleApp.Command
             collections[name] = collection;
         }
 
-        public static void ProcessCommand(string input, int loaded=0)
+        public static void ProcessCommand(string input, int loaded = 0)
         {
             string[] commandParts = input.Split(' ');
-            
-                string command = commandParts[0];
-                if (command == "exit")
-                {
-                    ExitCommand exitCommand = new ExitCommand();
-                        exitCommand.Execute();
+
+            string command = commandParts[0];
+            if (command == "exit")
+            {
+                ExitCommand exitCommand = new ExitCommand();
+                exitCommand.Execute();
                 return;
-                }
-                if (command == "history")
-                {
-                    HistoryCommand history = new HistoryCommand();
-                        history.Execute();
+            }
+            if (command == "history")
+            {
+                HistoryCommand history = new HistoryCommand();
+                history.Execute();
                 return;
-                }
+            }
             if (command == "redo")
-            {   if(CommandFactory.undoneCommands.Count == 0)
+            {
+                if (CommandFactory.undoneCommands.Count == 0)
                 {
                     Console.WriteLine("No commands to redo");
                     return;
                 }
                 RedoCommand redo = new RedoCommand(CommandFactory.undoneCommands.Pop());
-                    redo.Execute();
+                redo.Execute();
                 CommandFactory.commandHistory.Add(redo);
                 return;
             }
-                if(command == "undo")
+            if (command == "undo")
             {
                 if (CommandFactory.executedCommands.Count == 0)
                 {
@@ -221,14 +156,14 @@ namespace ConsoleApp.Command
                 ICommand todo = CommandFactory.executedCommands.Last();
                 UndoCommand undo = new UndoCommand(todo);
                 CommandFactory.undoneCommands.Push(todo);
-                        undo.Execute();
+                undo.Execute();
                 CommandFactory.commandHistory.Add(undo);
-                    return;
-                }
-                
-            else if(command == "load")
+                return;
+            }
+
+            else if (command == "load")
             {   //Dodaj man dla kazej komendy
-                if(commandParts.Length < 1)
+                if (commandParts.Length < 1)
                 {
                     Console.WriteLine("Invalid command parameters. Usage: queue {load} {filename} ");
                     return;
@@ -238,11 +173,11 @@ namespace ConsoleApp.Command
                 CommandFactory.commandHistory.Add(loadCommand);
                 //CommandFactory.executedCommands.Add(loadCommand);
                 loadCommand.Execute();
-                
-                
+
+
                 return;
             }
-            else if(command == "export")
+            else if (command == "export")
             {
                 if (commandParts.Length < 1)
                 {
@@ -254,12 +189,12 @@ namespace ConsoleApp.Command
                 ExportCommand exportCommand = new ExportCommand(filename, format);
                 if (loaded != 1)
                     exportCommand.Execute();
-               
+
                 CommandFactory.commandHistory.Add(exportCommand);
                 CommandFactory.executedCommands.Add(exportCommand);
                 return;
             }
-            else if(command !="load" && command !="export")
+            else if (command != "load" && command != "export")
             {
                 string collectionName = commandParts.Length > 1 ? commandParts[1] : "";
 
@@ -267,17 +202,17 @@ namespace ConsoleApp.Command
                 {
                     string[] arguments = new string[commandParts.Length - 1];
                     Array.Copy(commandParts, 1, arguments, 0, commandParts.Length - 1);
-                    
+
                     ICommand commandObj = CommandFactory.CreateCommand(command, collection, arguments);
                     if (commandObj != null)
                     {
                         CommandFactory.commandHistory.Add(commandObj);
-                        if(command != "list")
-                        CommandFactory.executedCommands.Add(commandObj);
+                        if (command != "list")
+                            CommandFactory.executedCommands.Add(commandObj);
                         commandObj.Execute();
                     }
                 }
-                else 
+                else
                 {
                     Console.WriteLine("Unknown collection: " + collectionName);
                 }
@@ -285,9 +220,9 @@ namespace ConsoleApp.Command
 
 
         }
-        }
-
     }
+
+}
 
 
 

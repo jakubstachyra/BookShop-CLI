@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Reflection;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace ConsoleApp.Command
 {
@@ -80,9 +75,9 @@ namespace ConsoleApp.Command
 
             Console.WriteLine("History exported to plaintext file: " + filenameWithExtension);
         }
-        public override string  ToString()
+        public override string ToString()
         {
-            return "Export " + filename + " "  + format;
+            return "Export " + filename + " " + format;
         }
         public void Undo()
         {

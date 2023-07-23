@@ -1,11 +1,6 @@
 ﻿using Bajtpik.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Bajtpik.Data.Interfaces;
+using System.Text;
 
 namespace ConsoleApp.Command
 {
@@ -92,11 +87,11 @@ namespace ConsoleApp.Command
 
                 foreach (var requirement in requirements)
                 {
-                    char[] separators = { '=', '<', '>'};
+                    char[] separators = { '=', '<', '>' };
                     string[] requirementParts = requirement.Split(separators);
 
                     int separatorIndex = requirement.IndexOfAny(separators);
-                    string fieldName="", operatorSymbol="", fieldValue="";
+                    string fieldName = "", operatorSymbol = "", fieldValue = "";
                     if (separatorIndex >= 0)
                     {
                         fieldName = requirement.Substring(0, separatorIndex).Trim();

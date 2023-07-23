@@ -1,11 +1,5 @@
-﻿using Bajtpik.Data.Interfaces;
-using Bajtpik.Data.Builders;
-using Bajtpik.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bajtpik.Data.Builders;
+using Bajtpik.Data.Interfaces;
 
 namespace ConsoleApp.Command
 {
@@ -135,7 +129,7 @@ namespace ConsoleApp.Command
 
         public void Redo()
         {
-            if (isExecuted && CommandFactory.undoneCommands.Count  > 0)
+            if (isExecuted && CommandFactory.undoneCommands.Count > 0)
             {
                 collection.Add(addedEntity);
                 Console.WriteLine($"{addedEntity} added (Redo).");

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace Bajtpik
+﻿namespace Bajtpik
 {
     public class Deque<T> : ICollections<T>
     {
@@ -40,8 +31,8 @@ namespace Bajtpik
         }
         public void FrontInsertion(T item)
         {
-            if(Head == null)
-            {   
+            if (Head == null)
+            {
                 Head = new Node();
                 Tail = Head;
             }
@@ -95,7 +86,7 @@ namespace Bajtpik
 
             public DequeForwardIterator(Deque<T> Deque)
             {
-                this.current = null;
+                current = null;
                 this.Deque = Deque;
             }
 
@@ -104,7 +95,7 @@ namespace Bajtpik
                 current = null;
                 i = 0;
             }
-            public override T Current() => this.current.Vector[i];
+            public override T Current() => current.Vector[i];
 
             public override bool MoveNext()
             {
@@ -138,7 +129,7 @@ namespace Bajtpik
 
             public DequeReverseIterator(Deque<T> Deque)
             {
-                this.current = null;
+                current = null;
                 this.Deque = Deque;
             }
 
@@ -147,7 +138,7 @@ namespace Bajtpik
                 current = null;
                 i = 0;
             }
-            public override T Current() => this.current.Vector[i];
+            public override T Current() => current.Vector[i];
 
             public override bool MoveNext()
             {
@@ -178,23 +169,23 @@ namespace Bajtpik
         {
             while (it.MoveNext())
             {
-                if(predicate(it.Current())) return it.Current(); 
+                if (predicate(it.Current())) return it.Current();
             }
             return null;
         }
-        public static void ForEach<T>(ICollections<T>.Iterator it, Action<T> action )
+        public static void ForEach<T>(ICollections<T>.Iterator it, Action<T> action)
         {
-            while(it.MoveNext())
+            while (it.MoveNext())
             {
                 action(it.Current());
             }
         }
-        public static int CountIf(ICollections<T>.Iterator it, Predicate<T> predicate) 
-        {   
+        public static int CountIf(ICollections<T>.Iterator it, Predicate<T> predicate)
+        {
             int i = 0;
-            while(it.MoveNext())
+            while (it.MoveNext())
             {
-                if(predicate(it.Current())) i++;
+                if (predicate(it.Current())) i++;
             }
             return i;
         }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using Bajtpik.Data.Interfaces;
 using System.Text;
-using System.Threading.Tasks;
-using Bajtpik.Data.Interfaces;
 
 namespace Bajtpik.Data
 {
@@ -72,22 +67,22 @@ namespace Bajtpik.Data
             }
             return stringBuilder.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "title":
-                    return (Title,"string");
+                    return (Title, "string");
 
                 case "year":
-                    return (Year,"int");
+                    return (Year, "int");
 
                 case "pagecount":
-                    return (PageCount,"int");
+                    return (PageCount, "int");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -146,22 +141,22 @@ namespace Bajtpik.Data
             stringBuilder.Append(Title).Append(" ").Append(Year).Append(" ").Append(PageCount);
             return stringBuilder.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "title":
-                    return (Title,"string");
+                    return (Title, "string");
 
                 case "year":
-                    return (Year,"int");
+                    return (Year, "int");
 
                 case "pagecount":
-                    return (PageCount,"int");
+                    return (PageCount, "int");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -247,25 +242,25 @@ namespace Bajtpik.Data
             }
             return stringBuilder.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "title":
-                    return (Title,"string");
+                    return (Title, "string");
 
                 case "minplayers":
-                    return (MinPlayers,"int");
+                    return (MinPlayers, "int");
 
                 case "maxplayers":
-                    return (MaxPlayers,"int");
+                    return (MaxPlayers, "int");
 
                 case "difficulty":
-                    return (Difficulty,"int");
+                    return (Difficulty, "int");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -335,24 +330,24 @@ namespace Bajtpik.Data
             stringBuilder.Append(Name).Append(" ").Append(Surname).Append(" ").Append(BirthYear).Append(" ").Append(NickName);
             return stringBuilder.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "name":
-                    return (Name,"string");
+                    return (Name, "string");
 
                 case "surname":
-                    return (Surname,"string");
+                    return (Surname, "string");
 
                 case "birthyear":
-                    return (BirthYear,"int");
+                    return (BirthYear, "int");
                 case "nickname":
-                    return (NickName,"string");
+                    return (NickName, "string");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -361,7 +356,7 @@ namespace Bajtpik.Data
         }
 
     }
-    public class BookListOfTuple: IEntity
+    public class BookListOfTuple : IEntity
     {
         public List<Tuple<string, object>> List = new List<Tuple<string, object>>();
 
@@ -373,7 +368,7 @@ namespace Bajtpik.Data
             List.Add(new Tuple<string, object>("Year", Year));
             List.Add(new Tuple<string, object>("PageCount", Pagecount));
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             BookListOfTupleAdapter adapter = new BookListOfTupleAdapter(this);
             switch (propertyName.ToLower())
@@ -389,7 +384,7 @@ namespace Bajtpik.Data
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -406,7 +401,7 @@ namespace Bajtpik.Data
             }
         }
     }
-    public class NewspaperListOfTuple: IEntity
+    public class NewspaperListOfTuple : IEntity
     {
         public List<Tuple<string, object>> List = new List<Tuple<string, object>>();
         public NewspaperListOfTuple(string title, int Year, int Pagecount)
@@ -417,7 +412,7 @@ namespace Bajtpik.Data
             List.Add(new Tuple<string, object>("PageCount", Pagecount));
 
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             NewspaperListOfTupleAdapter adapter = new NewspaperListOfTupleAdapter(this);
             switch (propertyName.ToLower())
@@ -433,7 +428,7 @@ namespace Bajtpik.Data
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -450,7 +445,7 @@ namespace Bajtpik.Data
             }
         }
     }
-    public class BoardgameListOfTuple: IEntity
+    public class BoardgameListOfTuple : IEntity
     {
         public List<Tuple<string, object>> List = new List<Tuple<string, object>>();
         public BoardgameListOfTuple(string title, int? MinPlayers, int? MaxPlayers, int Difficulty, List<IAuthor> authors)
@@ -460,7 +455,7 @@ namespace Bajtpik.Data
             List.Add(new Tuple<string, object>("MaxPlayers", MaxPlayers));
             List.Add(new Tuple<string, object>("Authors", authors));
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             BoardgameListOfTupleAdapter adapter = new BoardgameListOfTupleAdapter(this);
             switch (propertyName.ToLower())
@@ -478,7 +473,7 @@ namespace Bajtpik.Data
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -496,7 +491,7 @@ namespace Bajtpik.Data
         }
 
     }
-    public class AuthorListOfTuple: IEntity
+    public class AuthorListOfTuple : IEntity
     {
         public List<Tuple<string, object>> List = new List<Tuple<string, object>>();
         public AuthorListOfTuple(string name, string surname, int BirthYear, string Nickname)
@@ -506,7 +501,7 @@ namespace Bajtpik.Data
             List.Add(new Tuple<string, object>("BirthYear", BirthYear));
             List.Add(new Tuple<string, object>("Nickname", Nickname));
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             AuthorListOfTupleAdapter adapter = new AuthorListOfTupleAdapter(this);
             switch (propertyName.ToLower())
@@ -524,7 +519,7 @@ namespace Bajtpik.Data
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)

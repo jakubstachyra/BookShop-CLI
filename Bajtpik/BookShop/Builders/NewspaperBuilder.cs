@@ -1,9 +1,4 @@
 ﻿using Bajtpik.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bajtpik.Data.Builders
 {
@@ -52,7 +47,7 @@ namespace Bajtpik.Data.Builders
         }
 
     }
-    public class NewspaperListOfTupleBuilder: NewspaperBuilder
+    public class NewspaperListOfTupleBuilder : NewspaperBuilder
     {
         public new IEntity Build()
         {

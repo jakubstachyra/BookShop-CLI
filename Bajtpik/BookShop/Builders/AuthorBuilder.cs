@@ -1,9 +1,4 @@
 ﻿using Bajtpik.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bajtpik.Data.Builders
 {
@@ -52,7 +47,7 @@ namespace Bajtpik.Data.Builders
             return new List<string> { "name", "surname", "birthYear", "nickname" };
         }
     }
-    public class AuthorListOfTupleBuilder: AuthorBuilder
+    public class AuthorListOfTupleBuilder : AuthorBuilder
     {
         public new IEntity Build()
         {

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Xml;
-using System.Reflection;
-
-namespace ConsoleApp.Command
+﻿namespace ConsoleApp.Command
 {
     public class CommandQueue
     {
@@ -58,13 +49,13 @@ namespace ConsoleApp.Command
         public override string ToString()
         {
             return "history";
-      
+
         }
         public void Redo()
         {
-            this.Execute();
+            Execute();
         }
-        public  void Undo()
+        public void Undo()
         {
             return;
         }

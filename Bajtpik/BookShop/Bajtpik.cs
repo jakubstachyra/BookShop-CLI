@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
+﻿using Bajtpik.Data.Interfaces;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Bajtpik.Data.Interfaces;
 
 namespace Bajtpik.Data
 {
@@ -33,7 +27,7 @@ namespace Bajtpik.Data
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(Title).Append(" ").Append(Year).Append(" ").Append(PageCount).Append(" ");
-            if(Authors != null)
+            if (Authors != null)
             {
                 foreach (var author in Authors)
                 {
@@ -42,23 +36,23 @@ namespace Bajtpik.Data
             }
             return sb.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "title":
-                    return (Title,"string");
+                    return (Title, "string");
 
                 case "year":
-                    return (Year,"int");
+                    return (Year, "int");
 
                 case "pagecount":
-                    return (PageCount,"int");
+                    return (PageCount, "int");
 
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object value)
@@ -100,22 +94,22 @@ namespace Bajtpik.Data
             sb.Append(Title).Append(" ").Append(Year).Append(" ").Append(PageCount);
             return sb.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "title":
-                    return (Title,"string");
+                    return (Title, "string");
 
                 case "year":
-                    return (Year,"int");
+                    return (Year, "int");
 
                 case "pagecount":
-                    return (PageCount,"int");
+                    return (PageCount, "int");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -156,24 +150,24 @@ namespace Bajtpik.Data
             Difficulty = difficulty;
             Authors = authors;
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "title":
-                    return (Title,"string");
+                    return (Title, "string");
 
                 case "minplayers":
-                    return (MinPlayers,"int");
+                    return (MinPlayers, "int");
 
                 case "maxplayers":
-                    return (MaxPlayers,"int");
+                    return (MaxPlayers, "int");
                 case "difficulty":
-                    return (Difficulty,"int");
+                    return (Difficulty, "int");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)
@@ -228,25 +222,25 @@ namespace Bajtpik.Data
             sb.Append(Name).Append(" ").Append(Surname).Append(" ").Append(BirthYear).Append(" ").Append(NickName).Append("\n");
             return sb.ToString();
         }
-        public (object?,string) GetProperty(string propertyName)
+        public (object?, string) GetProperty(string propertyName)
         {
             switch (propertyName.ToLower())
             {
                 case "name":
-                    return (Name,"string");
+                    return (Name, "string");
 
                 case "surname":
-                    return (Surname,"string");
-                    
+                    return (Surname, "string");
+
                 case "birthyear":
-                    return (BirthYear,"int");
+                    return (BirthYear, "int");
 
                 case "nickname":
-                    return (NickName,"string");
+                    return (NickName, "string");
 
                 default:
                     Console.WriteLine("Unknown field: " + propertyName);
-                    return (null,"");
+                    return (null, "");
             }
         }
         public void SetProperty(string propertyName, object? value)

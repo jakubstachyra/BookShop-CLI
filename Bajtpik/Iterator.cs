@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Collections;
 
 namespace Bajtpik
 {
@@ -102,7 +96,7 @@ namespace Bajtpik
             public DoublyLinkedListForwardIterator(DoublyLinkedList<T> list)
             {
                 this.list = list;
-                this.current = null;
+                current = null;
             }
 
             public override T Current() => current.data;
@@ -138,7 +132,7 @@ namespace Bajtpik
             public DoublyLinkedListReverseIterator(DoublyLinkedList<T> list)
             {
                 this.list = list;
-                this.current = null;
+                current = null;
             }
 
             public override T Current() => current.data;
@@ -234,7 +228,7 @@ namespace Bajtpik
             public VectorForwardIterator(Vector<T> list)
             {
                 this.list = list;
-                this.current = -1;
+                current = -1;
             }
 
             public override T Current() => list.items[current];
@@ -269,7 +263,7 @@ namespace Bajtpik
             public VectorReverseIterator(Vector<T> list)
             {
                 this.list = list;
-                this.current = list.count;
+                current = list.count;
             }
 
             public override T Current() => list.items[current];

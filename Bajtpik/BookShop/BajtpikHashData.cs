@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Bajtpik.Data.Interfaces;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Bajtpik.Data.Interfaces;
 // w konstruktorze book wywolywac Author dla Authora i w konstruktorze autor mapowac
 //                           
 //List<int> AuthorIds = new List<int>();
@@ -50,7 +45,7 @@ namespace Bajtpik.Data
         public int? BirthYear { get; }
         public int NickName { get; }
     }
-    public class BookHashDataAdapter 
+    public class BookHashDataAdapter
     {
         private BookHashData Adaptee;
 
@@ -173,7 +168,7 @@ namespace Bajtpik.Data
         }
 
     }
-    public class NewspaperHashDataAdapter 
+    public class NewspaperHashDataAdapter
     {
         private NewspaperHashData Adaptee;
 
