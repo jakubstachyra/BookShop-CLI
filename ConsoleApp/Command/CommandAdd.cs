@@ -1,5 +1,6 @@
 ﻿using Bajtpik.Data.Builders;
 using Bajtpik.Data.Interfaces;
+using System.Collections;
 
 namespace ConsoleApp.Command
 {
@@ -11,7 +12,7 @@ namespace ConsoleApp.Command
         private IEntity addedEntity;
         private bool isExecuted;
 
-        public AddCommand(ICollection<IEntity> collection, string className, string representation = "base")
+        public AddCommand(ICollection<IEntity> collection, string className="<className>", string representation = "base")
         {
             this.collection = collection;
             this.className = className;
@@ -152,7 +153,14 @@ namespace ConsoleApp.Command
                 Console.WriteLine("Nothing to undo.");
             }
         }
-
+        public string GetDescription()
+        {
+            return "\tadd - adds new object to the collection.\n";
+        }
+        public string Man()
+        {
+            return "add <className> <representation> - adds new object of <className> with <repesentation> to the collection";
+        }
         public override string ToString()
         {
             return "Add " + className + " " + representation;

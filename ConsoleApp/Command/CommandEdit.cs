@@ -172,7 +172,18 @@ namespace ConsoleApp.Command
                 }
             }
         }
-
+        public string GetDescription()
+        {
+            return "edit - edit an object with equal requirements (must be unique)";
+        }
+        public string Man()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Edit an existing object.");
+            sb.AppendLine("Usage: edit <name_of_the_class> [<requirement> ...] [<field_name>=<new_value> ...]");
+            sb.AppendLine("Example: edit Person name=John age=25");
+            return sb.ToString();
+        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

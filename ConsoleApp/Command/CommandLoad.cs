@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp.Command
+﻿using System.Text;
+
+namespace ConsoleApp.Command
 {
     public class LoadCommand : ICommand
     {
@@ -20,7 +22,17 @@
             }
             Console.WriteLine($"Commands loaded from '{filename}' and added to the history.");
         }
-
+        public string GetDescription()
+        {
+            return "load - loads commands history from a file.";
+        }
+        public string Man()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("load - loads commands history from a file.");
+            sb.AppendLine("Usage: load <filename>");
+            return sb.ToString();
+        }
         public override string ToString()
         {
             return $"Load {filename}";

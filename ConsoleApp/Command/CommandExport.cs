@@ -75,6 +75,14 @@ namespace ConsoleApp.Command
 
             Console.WriteLine("History exported to plaintext file: " + filenameWithExtension);
         }
+        public string GetDescription()
+        {
+            return "export - Exports the command history to a file.";
+        }
+        public string Man()
+        {
+            return "export <filename> <format> - Exports the command history to a file with <filename> and <format> (XML or PlainText).";
+        }
         public override string ToString()
         {
             return "Export " + filename + " " + format;

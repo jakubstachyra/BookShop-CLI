@@ -15,6 +15,14 @@
             commandManager.Redo();
             CommandFactory.undoneCommands.Pop();
         }
+        public string GetDescription()
+        {
+            return "redo - redo the last undone command";
+        }
+        public string Man()
+        {
+            return GetDescription();
+        }
         public override string ToString()
         {
             return "redo";
@@ -44,6 +52,14 @@
             CommandFactory.undoneCommands.Push(commandManager);
             commandManager.Undo();
             CommandFactory.executedCommands.Remove(commandManager);
+        }
+        public string GetDescription()
+        {
+            return "undo - undoes the last command.";
+        }
+        public string Man()
+        {
+            return GetDescription();
         }
         public override string ToString()
         {

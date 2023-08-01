@@ -25,6 +25,17 @@ namespace ConsoleApp.Command
             }
             Console.WriteLine();
         }
+        public string GetDescription()
+        {
+            return "list - lists all objects in the database";
+        }
+        public string Man()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("list - lists all objects of given kind in the database");
+            sb.AppendLine("Usage: list <name_of_the_class>");
+            return sb.ToString();
+        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

@@ -32,7 +32,7 @@ bool isRunning = true;
 while (isRunning)
 {
     Console.ForegroundColor = ConsoleColor.DarkCyan;
-    Console.Write(">");
+    Console.Write("> ");
     Console.ForegroundColor = ConsoleColor.White;
     string command = Console.ReadLine();
     CommandProcessor.ProcessCommand(command);

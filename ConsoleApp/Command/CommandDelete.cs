@@ -52,6 +52,19 @@ namespace ConsoleApp.Command
             collection.Add(deletedObject);
             Console.WriteLine($"Undo: {deletedObject.ToString()} restored.");
         }
+        public string GetDescription()
+        {
+            return "\tdelete - Deletes an object of a given class with a given set of requirements.\n";
+        }
+        public string Man()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Deletes an object of a given class with a given <name_of_class> with <requirement> ...");
+            sb.AppendLine("Usage: delete <name_of_the_class> [<requirement> ...]");
+            sb.AppendLine("Example: delete Person name=Mike");
+            return sb.ToString();
+        }
+        
 
         public override string ToString()
         {

@@ -181,8 +181,15 @@ namespace ConsoleApp.Command
 
             return false;
         }
-
-
+        public string GetDescription()
+        {
+            return "find - prints all objects of a given class that meet the requirements\n";
+                   
+        }
+        public string Man()
+        {
+            return "find <name_of_the_class> [<requirement> ...] - find all objects of the given class that meet the requirements";
+        }
 
         public override string ToString()
         {

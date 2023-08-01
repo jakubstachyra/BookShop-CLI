@@ -7,8 +7,10 @@ namespace ConsoleApp.Command
         void Execute();
         void Undo();
         void Redo();
-
+        string GetDescription();
     }
+
+
 
     public class CommandFactory
     {
@@ -22,9 +24,9 @@ namespace ConsoleApp.Command
             return commandHistory;
         }
 
-        public static ICommand CreateCommand(string command, ICollection<IEntity> collection, string[] arguments)
+        public static ICommand? CreateCommand(string command, ICollection<IEntity> collection, string[] arguments)
         {
-            ICommand createdCommand;
+            ICommand? createdCommand;
 
             switch (command.ToLower())
             {
@@ -34,10 +36,6 @@ namespace ConsoleApp.Command
 
                 case "find":
                     createdCommand = new FindCommand(collection, arguments);
-                    break;
-
-                case "exit":
-                    createdCommand = new ExitCommand();
                     break;
                 case "edit":
                     createdCommand = new EditCommand(collection, arguments);
@@ -58,16 +56,6 @@ namespace ConsoleApp.Command
                         }
                         createdCommand = new AddCommand(collection, arguments[0]);
                     }
-                    break;
-
-                case "history":
-                    createdCommand = new HistoryCommand();
-                    break;
-                case "redo":
-                    createdCommand = new RedoCommand(executedCommands.Last());
-                    break;
-                case "undo":
-                    createdCommand = new UndoCommand(executedCommands.Last());
                     break;
                 case "export":
                     if (arguments.Length > 0)
@@ -101,15 +89,82 @@ namespace ConsoleApp.Command
 
             return createdCommand;
         }
+        public static ICommand? CreateCommand(string command)
+        {
+            ICommand? createdCommand = null;
+
+            switch (command.ToLower())
+            {
+                case "exit":
+                    createdCommand = new ExitCommand();
+                    break;
+                case "history":
+                    createdCommand = new HistoryCommand();
+                    break;
+                case "redo":
+                    if (undoneCommands.Count == 0)
+                    {
+                        Console.WriteLine("No commands to redo");
+                        break;
+                    }
+                    createdCommand = new RedoCommand(undoneCommands.Pop());
+                    break;
+                case "undo":
+                    if (executedCommands.Count == 0)
+                    {
+                        Console.WriteLine("No commands to undo");
+                        break;
+                    }
+                    ICommand todo = executedCommands.Last();
+                    UndoCommand undo = new UndoCommand(todo);
+                    undoneCommands.Push(todo);
+               
+                    createdCommand = new UndoCommand(executedCommands.Last());
+                    break;
+                case "help":
+                    createdCommand = new HelpCommand();
+                    break;
+                case "clear":
+                    createdCommand = new CommandClear();
+                    break;
+                default:
+                    Console.WriteLine("Unknown command: " + command);
+                    break;
+
+            }
+
+            return createdCommand;
+        }
     }
 
     public class CommandProcessor
     {
+        private readonly IDictionary<string, ICommand> commandHandlers;
+        public static IDictionary<string, string> commandDescriptions;
+        
         private static IDictionary<string, ICollection<IEntity>> collections;
 
         public CommandProcessor()
         {
             collections = new Dictionary<string, ICollection<IEntity>>();
+            commandDescriptions = new Dictionary<string, string>
+        {
+            { "list", "List all entities in the collection." },
+            { "find", "Find entities based on specified criteria." },
+            { "edit", "Edit an entity." },
+            { "delete", "Delete an entity." },
+            { "add", "Add a new entity to the collection." },
+            { "history", "Display the history of executed commands." },
+            { "undo", "Undo the last executed command." },
+            { "redo", "Redo the last undone command." },
+            { "export", "Export the collection to a file. Usage: export <filename> [format]" },
+            { "load", "Load a collection from a file. Usage: load <filename>" },
+            { "help", "Display available commands and their descriptions." },
+            { "man", "Show the manual for a specific command. Usage: man <command>" },
+            {"clear","Clears screen." }
+                
+        };
+      
         }
 
         public void RegisterCollection(string name, ICollection<IEntity> collection)
@@ -122,46 +177,9 @@ namespace ConsoleApp.Command
             string[] commandParts = input.Split(' ');
 
             string command = commandParts[0];
-            if (command == "exit")
-            {
-                ExitCommand exitCommand = new ExitCommand();
-                exitCommand.Execute();
-                return;
-            }
-            if (command == "history")
-            {
-                HistoryCommand history = new HistoryCommand();
-                history.Execute();
-                return;
-            }
-            if (command == "redo")
-            {
-                if (CommandFactory.undoneCommands.Count == 0)
-                {
-                    Console.WriteLine("No commands to redo");
-                    return;
-                }
-                RedoCommand redo = new RedoCommand(CommandFactory.undoneCommands.Pop());
-                redo.Execute();
-                CommandFactory.commandHistory.Add(redo);
-                return;
-            }
-            if (command == "undo")
-            {
-                if (CommandFactory.executedCommands.Count == 0)
-                {
-                    Console.WriteLine("No commands to undo");
-                    return;
-                }
-                ICommand todo = CommandFactory.executedCommands.Last();
-                UndoCommand undo = new UndoCommand(todo);
-                CommandFactory.undoneCommands.Push(todo);
-                undo.Execute();
-                CommandFactory.commandHistory.Add(undo);
-                return;
-            }
+          
 
-            else if (command == "load")
+            if (command == "load")
             {   //Dodaj man dla kazej komendy
                 if (commandParts.Length < 1)
                 {
@@ -209,6 +227,15 @@ namespace ConsoleApp.Command
                         CommandFactory.commandHistory.Add(commandObj);
                         if (command != "list")
                             CommandFactory.executedCommands.Add(commandObj);
+                        commandObj.Execute();
+                    }
+                }
+                else if(commandParts.Length == 1)
+                {
+
+                    ICommand commandObj = CommandFactory.CreateCommand(command);
+                    if (commandObj != null)
+                    {
                         commandObj.Execute();
                     }
                 }

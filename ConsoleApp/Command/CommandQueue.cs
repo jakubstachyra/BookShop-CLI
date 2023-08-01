@@ -46,6 +46,14 @@
             }
             Console.WriteLine();
         }
+        public string GetDescription()
+        {
+            return "history - shows the history of commands.";
+        }
+        public string Man()
+        {
+            return GetDescription();
+        }
         public override string ToString()
         {
             return "history";
